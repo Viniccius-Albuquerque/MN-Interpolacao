@@ -1,4 +1,5 @@
 from metodos.newton import interpolacao_newton
+from metodos.lagrange import interpolacao_lagrange
 
 dados = {
     "SRV-01": {
@@ -28,9 +29,12 @@ for servidor, incidentes in dados.items():
 
         x, y = pontos
 
-        temperatura = interpolacao_newton(x, y, horario)
+        temp_newton = interpolacao_newton(x, y, horario)
+        temp_lagrange = interpolacao_lagrange(x, y, horario)
 
         print(
             f"Horário: {int(horario)}h30 | "
-            f"Temperatura estimada: {temperatura:.5f} °C"
+            f"Newton: {temp_newton:.5f} °C | "
+            f"Lagrange: {temp_lagrange:.5f} °C | "
+            f"Dif: {abs(temp_newton - temp_lagrange):.2e}"
         )
